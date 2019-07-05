@@ -17,22 +17,10 @@ function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function cria_linha(subdivide) {
-  let lista = [];
-  const tamanho = subdivide/2
-  for (let index = 0; index < subdivide; index++) {
-
-    lista.push({ x: index - tamanho/2, y: index - tamanho/2 });
-  }
-  return lista;
-}
-
-function desenha_olho_esq(lista, frame, id) {
+function desenha_olho_esq(tamanho, frame, id) {
   pontos = "";
-  const tamanho = lista.length
   
   for (let index = 0; index < tamanho; index++) {
-    const p = lista[index];
     let theta = index/2 - tamanho
 
     nx =  (Math.cos((theta+frame))* index)+80;
@@ -43,14 +31,11 @@ function desenha_olho_esq(lista, frame, id) {
   document.getElementById(id).setAttribute("points", pontos);
 }
 
-function desenha_olho_dir(lista, frame, id) {
+function desenha_olho_dir(tamanho, frame, id) {
   pontos = "";
-  const tamanho = lista.length
-  
   for (let index = 0; index < tamanho; index++) {
-    const p = lista[index];
-    let theta = index/2 - tamanho
 
+    let theta = index/2 - tamanho
     nx = (Math.cos((theta-frame))* index)-80;
     ny =  (Math.sin((theta-frame))* index)+50;
     pontos += `${nx + x_centro},${-ny + y_centro} `;
@@ -58,12 +43,9 @@ function desenha_olho_dir(lista, frame, id) {
 
   document.getElementById(id).setAttribute("points", pontos);
 
-}function desenha_cara(lista,  id) {
+}function desenha_cara(tamanho,  id) {
   pontos = "";
-  const tamanho = lista.length
-  
   for (let index = 0; index < tamanho; index++) {
-    const p = lista[index];
     let theta = index/10 - tamanho/4
 
     nx = Math.cos(theta)*200;
@@ -73,12 +55,9 @@ function desenha_olho_dir(lista, frame, id) {
 
   document.getElementById(id).setAttribute("points", pontos);
 }
-function desenha_boca(lista,frame, id) {
+function desenha_boca(tamanho,frame, id) {
   pontos = "";
-  const tamanho = lista.length
-  
   for (let index = 0; index < tamanho; index++) {
-    const p = lista[index];
     let theta = index/2 - tamanho/4
 
     nx = theta*8;
@@ -89,8 +68,8 @@ function desenha_boca(lista,frame, id) {
   document.getElementById(id).setAttribute("points", pontos);
 }
 async function anima(frames) {
-  var olho = cria_linha(50);
-  var cabeca = cria_linha(100)
+  var olho = 50
+  var cabeca = 100
   desenha_cara(cabeca, "cara");
   
   for (let index = 0; index < frames; index++) {
@@ -103,6 +82,5 @@ async function anima(frames) {
 }
 
 function desenho() {
-  
   anima(frames);
 }
