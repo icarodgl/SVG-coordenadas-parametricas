@@ -1,8 +1,23 @@
-#linhas {
+#olho_dir {
   fill: none;
-  stroke: white;
-  stroke-width: 3;
+  stroke: black;
+  stroke-width: 2;
 }
 #desenho {
-  background: black;
+  background: rgb(255, 255, 255);
+}
+#olho_esq {
+  fill: none;
+  stroke: black;
+  stroke-width: 2;
+}
+#cara {
+  fill: none;
+  stroke: black;
+  stroke-width: 23;
+}
+#boca{
+  stroke: blue;
+  fill: none;
+  stroke-width: 2;
 }
