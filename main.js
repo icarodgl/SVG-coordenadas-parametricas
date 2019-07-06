@@ -36,10 +36,10 @@ const cabeca_y = (theta, frame, index) => {
   return Math.sin(theta) * 200;
 };
 const core_x = (theta, frame, index) => {
-  return (Math.sin(theta + frame) * 2 * index) / 4 + Math.sin(frame) * 100;
+  return Math.sin(theta + frame) * index + Math.sin(frame) * 100;
 };
 const core_y = (theta, frame, index) => {
-  return (-1 * (Math.cos(theta) * 2 * index)) / 4 + 250;
+  return -1 * (Math.cos(theta) * index) + 256;
 };
 // ############################# Inicia #########################################
 start();
@@ -49,15 +49,15 @@ function desenho() {
 }
 // ############################### Funcões de controle #######################################
 async function anima(frames) {
-  desenha(-50, 50, cabeca_x, cabeca_y, 1, "cara");
+  desenha(0, 60, cabeca_x, cabeca_y, 1, "cara");
   for (let index = 0; index < frames; index++) {
-    desenha(-39, 39, core_x, core_y, (16 + index) / 6 + velocidade, "core");
+    desenha(-39, 39, core_x, core_y, (index + 16) / 6 + velocidade, "core");
     desenha(-39, 39, core_x, core_y, index / 6 + velocidade, "core2");
     desenha(0, 80, olho_esq_x, olho_esq_y, index / velocidade, "olho_esq");
     desenha(0, 80, olho_dir_x, olho_dir_y, index / velocidade, "olho_dir");
     desenha(0, 200, boca_x, boca_y, index / velocidade, "boca");
 
-    await sleep(200);
+    await sleep(30);
   }
 }
 function desenha(min, max, fx, fy, frame, id) {
