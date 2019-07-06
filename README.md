@@ -32,11 +32,11 @@
 
     boca:
     - x: theta*8
-    - y: Math.sin(theta)*Math.sin(frame)*6;
+    - y: Math.sin(theta)*Math.sin(frame)*6
 
     corações:
-    - x: (Math.sin(theta + frame) * 2 * index) / 4 + Math.sin(frame) * 100;
-    - y: (-1 * (Math.cos(theta) * 2 * index)) / 4 + 256;
+    - x: Math.sin(theta + frame) * index + Math.sin(frame) * 100
+    - y: -1 * (Math.cos(theta) * index) + 256
 
 ## Referencias
 
