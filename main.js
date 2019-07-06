@@ -3,84 +3,81 @@ const x_Height = window.innerHeight;
 const x_centro = x_width / 2;
 const y_centro = x_Height / 2;
 const frames = 3000;
-const mh = document.getElementById("desenho").setAttribute("height", x_Height);
-const mw = document.getElementById("desenho").setAttribute("width", x_width);
-const mc = document.getElementById("cara_fundo")
-mc.setAttribute("cy", y_centro);
-mc.setAttribute("cx", x_centro);
-const mb = document.getElementById("cara_fundo")
-mb.setAttribute("cy", y_centro);
-mb.setAttribute("cx", x_centro);
+
+const olho_dir_x = (theta, frame, index) => {
+  return Math.cos(theta - frame) * index + 80;
+};
+
+const olho_dir_y = (theta, frame, index) => {
+  return Math.sin(theta - frame) * index + 50;
+};
+const olho_esq_x = (theta, frame, index) => {
+  return Math.cos(theta - frame) * index - 80;
+};
+
+const olho_esq_y = (theta, frame, index) => {
+  return Math.sin(theta - frame) * index + 50;
+};
+
+const boca_x = (theta, frame, index) => {
+  return theta * 8 + 100;
+};
+
+const boca_y = (theta, frame, index) => {
+  return Math.sin(theta) * Math.sin(frame) * 6 - 100;
+};
+
+const cabeca_x = (theta, frame, index) => {
+  return Math.cos(theta) * 200;
+};
+
+const cabeca_y = (theta, frame, index) => {
+  return Math.sin(theta) * 200;
+};
+// ######################################################################
+start();
 desenho();
+
+function desenho() {
+  anima(frames);
+}
+async function anima(frames) {
+  //desenha_cara(-50, 50, "cara");
+  desenha(-50, 50, cabeca_x, cabeca_y, 1, "cara");
+  for (let index = 0; index < frames; index++) {
+    desenha(0, 80, olho_esq_x, olho_esq_y, index, "olho_esq");
+    desenha(0, 80, olho_dir_x, olho_dir_y, index, "olho_dir");
+    desenha(0, 200, boca_x, boca_y, index, "boca");
+    await sleep(200);
+  }
+}
+function desenha(min, max, fx, fy, frame, id) {
+  pontos = "";
+  let nx = 0;
+  let nt = 0;
+  for (let index = min; index < max; index++) {
+    let theta = (index - max) / 8;
+    nx = fx(theta, frame, index);
+    ny = fy(theta, frame, index);
+    pontos += `${nx + x_centro},${-ny + y_centro} `;
+  }
+  document.getElementById(id).setAttribute("points", pontos);
+}
 
 function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function desenha_olho_esq(tamanho, frame, id) {
-  pontos = "";
-  
-  for (let index = 0; index < tamanho; index++) {
-    let theta = index/2 - tamanho
-
-    nx =  (Math.cos((theta+frame))* index)+80;
-    ny = (Math.sin((theta+frame))* index)+50;
-    pontos += `${nx + x_centro},${-ny + y_centro} `;
-  }
-
-  document.getElementById(id).setAttribute("points", pontos);
-}
-
-function desenha_olho_dir(tamanho, frame, id) {
-  pontos = "";
-  for (let index = 0; index < tamanho; index++) {
-
-    let theta = index/2 - tamanho
-    nx = (Math.cos((theta-frame))* index)-80;
-    ny =  (Math.sin((theta-frame))* index)+50;
-    pontos += `${nx + x_centro},${-ny + y_centro} `;
-  }
-
-  document.getElementById(id).setAttribute("points", pontos);
-
-}function desenha_cara(tamanho,  id) {
-  pontos = "";
-  for (let index = 0; index < tamanho; index++) {
-    let theta = index/10 - tamanho/4
-
-    nx = Math.cos(theta)*200;
-    ny = Math.sin(theta)*200;
-    pontos += `${nx + x_centro},${-ny + y_centro} `;
-  }
-
-  document.getElementById(id).setAttribute("points", pontos);
-}
-function desenha_boca(tamanho,frame, id) {
-  pontos = "";
-  for (let index = 0; index < tamanho; index++) {
-    let theta = index/2 - tamanho/4
-
-    nx = theta*8;
-    ny = Math.sin(theta)*Math.sin(frame)*6 - 80;
-    pontos += `${nx + x_centro},${-ny + y_centro} `;
-  }
-
-  document.getElementById(id).setAttribute("points", pontos);
-}
-async function anima(frames) {
-  var olho = 50
-  var cabeca = 100
-  desenha_cara(cabeca, "cara");
-  
-  for (let index = 0; index < frames; index++) {
-    desenha_olho_esq(olho, index, "olho_esq");
-    desenha_olho_dir(olho, index, "olho_dir");
-    desenha_boca(olho, index,"boca")
-   
-    await sleep(200);
-  }
-}
-
-function desenho() {
-  anima(frames);
+//##################################################################
+function start() {
+  const mh = document
+    .getElementById("desenho")
+    .setAttribute("height", x_Height);
+  const mw = document.getElementById("desenho").setAttribute("width", x_width);
+  const mc = document.getElementById("cara_fundo");
+  mc.setAttribute("cy", y_centro);
+  mc.setAttribute("cx", x_centro);
+  const mb = document.getElementById("cara_fundo");
+  mb.setAttribute("cy", y_centro);
+  mb.setAttribute("cx", x_centro);
 }
