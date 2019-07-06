@@ -16,8 +16,18 @@
   stroke: black;
   stroke-width: 23;
 }
-#boca{
+#boca {
   stroke: blue;
   fill: none;
+  stroke-width: 2;
+}
+#core {
+  fill: none;
+  stroke: black;
+  stroke-width: 2;
+}
+#core2 {
+  fill: none;
+  stroke: black;
   stroke-width: 2;
 }

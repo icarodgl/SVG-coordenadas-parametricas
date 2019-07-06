@@ -3,6 +3,7 @@ const x_Height = window.innerHeight;
 const x_centro = x_width / 2;
 const y_centro = x_Height / 2;
 const frames = 3000;
+const velocidade = 4;
 
 const olho_dir_x = (theta, frame, index) => {
   return Math.cos(theta - frame) * index + 80;
@@ -34,20 +35,28 @@ const cabeca_x = (theta, frame, index) => {
 const cabeca_y = (theta, frame, index) => {
   return Math.sin(theta) * 200;
 };
-// ######################################################################
+const core_x = (theta, frame, index) => {
+  return (Math.sin(theta + frame) * 2 * index) / 4 + Math.sin(frame) * 100;
+};
+const core_y = (theta, frame, index) => {
+  return (-1 * (Math.cos(theta) * 2 * index)) / 4 + 250;
+};
+// ############################# Inicia #########################################
 start();
 desenho();
-
 function desenho() {
   anima(frames);
 }
+// ############################### Funcões de controle #######################################
 async function anima(frames) {
-  //desenha_cara(-50, 50, "cara");
   desenha(-50, 50, cabeca_x, cabeca_y, 1, "cara");
   for (let index = 0; index < frames; index++) {
-    desenha(0, 80, olho_esq_x, olho_esq_y, index, "olho_esq");
-    desenha(0, 80, olho_dir_x, olho_dir_y, index, "olho_dir");
-    desenha(0, 200, boca_x, boca_y, index, "boca");
+    desenha(-39, 39, core_x, core_y, (16 + index) / 6 + velocidade, "core");
+    desenha(-39, 39, core_x, core_y, index / 6 + velocidade, "core2");
+    desenha(0, 80, olho_esq_x, olho_esq_y, index / velocidade, "olho_esq");
+    desenha(0, 80, olho_dir_x, olho_dir_y, index / velocidade, "olho_dir");
+    desenha(0, 200, boca_x, boca_y, index / velocidade, "boca");
+
     await sleep(200);
   }
 }
@@ -68,7 +77,7 @@ function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
-//##################################################################
+//############################# Função inicial#####################################
 function start() {
   const mh = document
     .getElementById("desenho")
