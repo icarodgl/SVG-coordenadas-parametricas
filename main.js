@@ -6,18 +6,18 @@ const frames = 3000;
 const velocidade = 4;
 
 const olho_dir_x = (theta, frame, index) => {
-  return Math.cos(theta - frame) * index + 80;
+  return Math.cos(theta - frame) * index * 0.75 + 80;
 };
 
 const olho_dir_y = (theta, frame, index) => {
-  return Math.sin(theta - frame) * index + 50;
+  return Math.sin(theta - frame) * index * 0.75 + 50;
 };
 const olho_esq_x = (theta, frame, index) => {
-  return Math.cos(theta - frame) * index - 80;
+  return Math.cos(theta - frame) * index * 0.75 - 80;
 };
 
 const olho_esq_y = (theta, frame, index) => {
-  return Math.sin(theta - frame) * index + 50;
+  return Math.sin(theta - frame) * index * 0.75 + 50;
 };
 
 const boca_x = (theta, frame, index) => {
