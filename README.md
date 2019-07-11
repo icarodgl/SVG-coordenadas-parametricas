@@ -1,33 +1,4 @@
-# Trabalho de Calculo II
-
-## Integrantes
-
-    - Icaro Duarte Gavazza Lima
-    - Jadson Pereira
-    - Magno Macedo de Oliveira
-
-## Orientadora
-
-    - Adriana Padua Lovatte
-
-## Objetivo
-
-        O objetivo do trabalho é relacionar os assuntos ligados à Cálculo Diferencial e Integral
-    com programação, verificando que curvas paramétricas e coordenadas polares podem ser implementadas
-    para gráficos de curvas não usuais e com movimentos.
-
-        O Trabalho consiste em utilizar curvas paramétricas, coordenadas polares ou superfícies cônicas
-    ou ambas para obter a Construção de um emoji com movimento.
-
-## Introdução
-
-        Para implementar o emoji com movimentos, nós utilizamos o HTML para estruturar a página, o CSS
-    que é um mecanismo para adicionar um estilo na página web e a linguagem JavaScript para poder desenhar
-    e fazer a animação.
-        Na implementação do nosso emoji, utilizamos o circulo para representar o rosto, os cardioides para
-    representar os corações sobrevoando a cabeça do emoji, a espirais para representar os olhos e gráficos
-    variados do seno para representar a boca.
-
+#SVG Coordenadas Paramétricas
 ## Curvas usadas
 
     Theta:
